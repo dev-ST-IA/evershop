@@ -129,6 +129,14 @@
         "required": ["option_name", "option_type", "values"],
         "additionalProperties": true
       }
+    },
+    "salesCountThres": {
+      "type": ["string", "number"],
+      "pattern": "^[0-9]+$"
+    },
+    "inventoryLeftThres": {
+      "type": ["string", "number"],
+      "pattern": "^[0-9]+$"
     }
   },
   "required": [

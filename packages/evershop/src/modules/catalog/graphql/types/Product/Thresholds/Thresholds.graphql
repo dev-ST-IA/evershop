@@ -1,0 +1,15 @@
+"""
+The `Thresholds` type represents a product's numbers to display in the UI.
+"""
+type Thresholds {
+  salesCount:Int
+  inventoryLeft:Int
+  salesCountThres: Int!
+  inventoryLeftThres: Int!
+  canShowSalesCount: Boolean
+  canShowInventoryLeftCount: Boolean
+}
+ 
+extend type Product {
+  thresholds: Thresholds!
+}

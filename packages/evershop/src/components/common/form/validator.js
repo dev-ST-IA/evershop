@@ -36,6 +36,13 @@ const rules = {
       return !/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(value);
     },
     errorMessage: 'No special character allowed'
+  },
+  positiveNumber:{
+    handler(value) {
+      if (value === null || value === undefined || value === '') return true;
+      return /^[0-9]\d*$|^0$/.test(value);
+    },
+    errorMessage: 'Invalid non-negative number'
   }
 };
 

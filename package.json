@@ -24,6 +24,7 @@
     "user:create": "evershop user:create",
     "user:changePassword": "evershop user:changePassword",
     "start:debug": "evershop start --debug",
+    "dev:debug": "evershop dev --debug",
     "test": "jest --workspace=@evershop/evershop",
     "cypress": "cypress run",
     "lint": "eslint --fix --ext .js,.jsx .",

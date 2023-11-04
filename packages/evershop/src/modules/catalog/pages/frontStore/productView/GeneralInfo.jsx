@@ -5,6 +5,7 @@ import './GeneralInfo.scss';
 import { Name } from '@components/frontStore/catalog/product/single/Name';
 import { Price } from '@components/frontStore/catalog/product/single/Price';
 import { Sku } from '@components/frontStore/catalog/product/single/Sku';
+import { MgInventoryLeft } from '@components/frontStore/catalog/product/single/MgInventoryLeft';
 
 export default function GeneralInfo({ product }) {
   return (
@@ -36,6 +37,15 @@ export default function GeneralInfo({ product }) {
           },
           sortOrder: 20,
           id: 'productSingleSku'
+        },
+        {
+          component: {default: MgInventoryLeft},
+          props: {
+            inventoryLeft: product.thresholds.inventoryLeft,
+            inventoryLeftThres: product.thresholds.inventoryLeftThres
+          },
+          sortOrder: 100,
+          id: 'productSingleInventoryLeft'
         }
       ]}
     />
@@ -55,6 +65,10 @@ GeneralInfo.propTypes = {
         value: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired
       })
+    }),
+    thresholds: PropTypes.shape({
+      inventoryLeft:PropTypes.number,
+      inventoryLeftThres: PropTypes.number
     })
   }).isRequired
 };
@@ -78,6 +92,10 @@ export const query = `
           value
           text
         }
+      }
+      thresholds{
+        inventoryLeft
+        inventoryLeftThres
       }
     }
   }`;
