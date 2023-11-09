@@ -1,0 +1,31 @@
+type RewardCategory {
+  categoryId: Int!
+  uuid: String!
+  categoryName: String!
+  categoryLimit: Int!
+  autoRestart: Boolean!
+  rewardDetails: String
+  active: Boolean!
+  editUrl: String
+  updateApi: String!
+  deleteApi: String!
+  addProductUrl: String
+}
+
+extend type Product {
+  rewardCategory: RewardCategory
+  rewardCategoryId: Int
+  removeFromRewardCategoryUrl: String
+}
+
+type RewardCategoryCollection {
+  items: [RewardCategory]
+  currentPage: Int!
+  total: Int!
+  currentFilters: [Filter]
+}
+
+extend type Query {
+  rewardCategories(filters: [FilterInput]): RewardCategoryCollection
+  rewardCategory (id: Int): RewardCategory
+}

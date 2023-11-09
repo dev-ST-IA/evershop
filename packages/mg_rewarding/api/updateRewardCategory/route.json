@@ -1,0 +1,5 @@
+{
+  "methods": ["PATCH"],
+  "path": "/rewardCategory/:id",
+  "access": "private"
+}

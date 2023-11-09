@@ -1,0 +1,23 @@
+type RewardRound {
+  roundID: ID!
+  uuid: String!
+  category: RewardCategory!
+  roundStatus: String!
+  roundStartDateTime: Date!
+  roundEndDateTime: Date
+  currentCompletedQuantity: Int
+  categoryLimit: Int!
+  winner: Customer
+  winnerSelectionDateTime: Date
+}
+
+type RewardRoundCollection {
+  items: [RewardRound]
+  currentPage: Int!
+  total: Int!
+  currentFilters: [Filter]
+}
+
+extend type Query {
+  rewardRounds(filters: [FilterInput]): RewardRoundCollection
+}

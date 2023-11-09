@@ -1,0 +1,5 @@
+{
+  "methods": ["GET"],
+  "path": "/rewardingSystem/edit/:id"
+}
+

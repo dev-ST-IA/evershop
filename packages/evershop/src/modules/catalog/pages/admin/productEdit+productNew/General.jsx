@@ -71,7 +71,7 @@ function Category({ product }) {
   );
 
   return (
-    <div className="mt-15 relative">
+    <div className="my-15 relative">
       <div className="mb-1">Category</div>
       {category && (
         <div className="border rounded border-[#c9cccf] mb-1 p-1">

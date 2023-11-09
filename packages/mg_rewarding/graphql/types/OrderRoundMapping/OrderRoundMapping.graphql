@@ -1,0 +1,6 @@
+type OrderRoundMapping {
+  mappingID: ID!
+  uuid: String!
+  round: RewardRound!
+  orderItem: OrderItem
+}

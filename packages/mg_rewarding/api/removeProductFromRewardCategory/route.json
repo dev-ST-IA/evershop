@@ -1,0 +1,5 @@
+{
+  "methods": ["DELETE"],
+  "path": "/rewardCategory/:category_id/products/:product_id",
+  "access": "private"
+}

@@ -1,0 +1,5 @@
+{
+  "methods": ["POST"],
+  "path": "/rewardCategory/:category_id/products",
+  "access": "private"
+}

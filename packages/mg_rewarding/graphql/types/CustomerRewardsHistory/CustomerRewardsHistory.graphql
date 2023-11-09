@@ -1,0 +1,7 @@
+type CustomerRewardsHistory {
+  historyID: ID!
+  uuid: String!
+  customer: Customer!
+  round: RewardRound!
+  rewardReceived: Boolean!
+}

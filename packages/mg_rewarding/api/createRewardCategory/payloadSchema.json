@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "category_name": {
+      "type": "string"
+    },
+    "reward_details": {
+      "type": "string",
+      "skipEscape": true
+    },
+    "active": {
+      "type": ["integer", "string"],
+      "enum": [0, 1, "0", "1"]
+    },
+    "category_limit": {
+      "type": ["string", "number"],
+      "pattern": "^[0-9]+$"
+    },
+    "auto_restart": {
+      "type": ["integer", "string"],
+      "enum": [0, 1, "0", "1"]
+    }
+  },
+  "required": [
+    "category_name",
+    "category_limit"
+  ],
+  "additionalProperties": true
+}
