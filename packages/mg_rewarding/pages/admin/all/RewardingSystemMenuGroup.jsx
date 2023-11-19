@@ -1,9 +1,9 @@
 import React from 'react';
 import NavigationItemGroup from '@components/admin/cms/NavigationItemGroup';
-import { GiftIcon, TagIcon } from '@heroicons/react/solid/esm/';
+import { GiftIcon, TagIcon, ClockIcon } from '@heroicons/react/solid/esm/';
 import PropTypes from 'prop-types';
 
-export default function RewardingSystemMenuGroup({rewardingCategoryNew,rewardingSystemGrid}) {
+export default function RewardingSystemMenuGroup({rewardingCategoryNew,rewardingSystemGrid, rewardingOngoingRounds}) {
   return (
     <NavigationItemGroup
       id="rewardingSystemMenuGroup"
@@ -18,6 +18,11 @@ export default function RewardingSystemMenuGroup({rewardingCategoryNew,rewarding
           Icon: TagIcon,
           url: rewardingSystemGrid,
           title: 'Reward Categories'
+        },
+        {
+          Icon: ClockIcon,
+          url: rewardingOngoingRounds,
+          title: 'On-Going Rounds'
         }
       ]}
     />
@@ -26,7 +31,8 @@ export default function RewardingSystemMenuGroup({rewardingCategoryNew,rewarding
 
 RewardingSystemMenuGroup.propTypes = {
   rewardingCategoryNew: PropTypes.string.isRequired,
-  rewardingSystemGrid: PropTypes.string.isRequired
+  rewardingSystemGrid: PropTypes.string.isRequired,
+  rewardingOngoingRounds: PropTypes.string.isRequired
 };
 
 
@@ -39,5 +45,6 @@ export const query = `
   query Query {
     rewardingCategoryNew: url(routeId:"rewardingCategoryNew")
     rewardingSystemGrid: url(routeId:"rewardingSystemGrid")
+    rewardingOngoingRounds : url(routeId:"rewardingOngoingRounds")
   }
 `;

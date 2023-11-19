@@ -1,14 +1,20 @@
 type RewardRound {
-  roundID: ID!
+  roundId: ID!
   uuid: String!
   category: RewardCategory!
   roundStatus: String!
-  roundStartDateTime: Date!
-  roundEndDateTime: Date
+  roundStartDateTime: String!
+  roundEndDateTime: String
   currentCompletedQuantity: Int
   categoryLimit: Int!
   winner: Customer
-  winnerSelectionDateTime: Date
+  winnerSelectionDateTime: String
+  isOngoing: Boolean
+  isCompleted: Boolean
+  viewRoundApi: String
+  selectWinnerApi: String
+  deleteApi: String
+  updateApi: String
 }
 
 type RewardRoundCollection {
@@ -20,4 +26,5 @@ type RewardRoundCollection {
 
 extend type Query {
   rewardRounds(filters: [FilterInput]): RewardRoundCollection
+  rewardRound (id: Int): RewardRound
 }

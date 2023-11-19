@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "selectedIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "integer"}
+    }
+  },
+  "required": [
+    "selectedIds"
+  ],
+  "additionalProperties": true
+}

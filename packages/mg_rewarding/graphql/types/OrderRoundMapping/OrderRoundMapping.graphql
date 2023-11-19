@@ -3,4 +3,5 @@ type OrderRoundMapping {
   uuid: String!
   round: RewardRound!
   orderItem: OrderItem
+  active: Boolean!
 }

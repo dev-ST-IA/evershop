@@ -8,15 +8,11 @@ import Pagination from '@components/common/grid/Pagination';
 import { Checkbox } from '@components/common/form/fields/Checkbox';
 import { Card } from '@components/admin/cms/Card';
 import BasicColumnHeader from '@components/common/grid/headers/Basic';
-import DropdownColumnHeader from '@components/common/grid/headers/Dropdown';
 import BasicRow from '@components/common/grid/rows/BasicRow';
-import RewardCategoryNameRow from '../../../components/admin/rewardingSystemGrid/rewardCategoryName';
-import RewardCategoryActive from '../../../components/admin/rewardingSystemGrid/rewardCategoryActive';
-import RewardingSystemGridActions from './actions/Actions.jsx'
+import CategoryRoundName from '../../../components/admin/rewardingOngoingRounds/categoryRoundName';
 
 export default function CategoryGrid({
-  rewardCategories: { items: categories, total, currentFilters = [] },
-  createRewardRoundsApi
+  rewardRounds: { items: rounds, total, currentFilters = [] }
 }) {
   const page = currentFilters.find((filter) => filter.key === 'page')
     ? currentFilters.find((filter) => filter.key === 'page').value
@@ -35,7 +31,7 @@ export default function CategoryGrid({
               <Checkbox
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setSelectedRows(categories.map((c) => c.uuid));
+                    setSelectedRows(rounds.map((c) => c.uuid));
                   } else {
                     setSelectedRows([]);
                   }
@@ -62,25 +58,33 @@ export default function CategoryGrid({
                 {
                   component: {
                     default: () => (
-                      <DropdownColumnHeader
-                        id="active"
-                        title="Active"
+                      <BasicColumnHeader
+                        id="category_limit"
+                        title="Category Limit"
                         currentFilters={currentFilters}
-                        options={[
-                          { value: 1, text: 'Active' },
-                          { value: 0, text: 'Inactive' }
-                        ]}
                       />
                     )
                   },
-                  sortOrder: 25
+                  sortOrder: 30
                 },
                 {
                   component: {
                     default: () => (
                       <BasicColumnHeader
-                        id="category_limit"
-                        title="Category Limit"
+                        id="current_completd_quantity"
+                        title="Quantity Completed"
+                        currentFilters={currentFilters}
+                      />
+                    )
+                  },
+                  sortOrder: 30
+                },
+                {
+                  component: {
+                    default: () => (
+                      <BasicColumnHeader
+                        id="round_start_date_time"
+                        title="Round Started Date"
                         currentFilters={currentFilters}
                       />
                     )
@@ -92,13 +96,7 @@ export default function CategoryGrid({
           </tr>
         </thead>
         <tbody>
-          <RewardingSystemGridActions
-            rewardCategories={categories}
-            selectedIds={selectedRows}
-            setSelectedRows={setSelectedRows}
-            actions={{createRewardRoundsApi}}
-          />
-          {categories.map((c) => (
+          {rounds.map((c) => (
             <tr key={c.categoryId}>
               <td style={{ width: '2rem' }}>
                 <Checkbox
@@ -113,28 +111,36 @@ export default function CategoryGrid({
               </td>
               <Area
                 className=""
-                id="categoryGridRow"
+                id="roundCategoryGridRow"
                 row={c}
                 noOuter
                 coreComponents={[
                   {
                     component: {
-                      default: () => <RewardCategoryNameRow id="categoryName" rewardCategory={c} />
+                      default: () => <CategoryRoundName id="categoryName" rewardRound={c?.category} />
                     },
                     sortOrder: 10
                   },
                   {
                     component: {
-                      default: () => (
-                        <RewardCategoryActive id="active" rewardCategory={c} />
+                      default: ({ areaProps }) => (
+                        <BasicRow id="categoryLimit" areaProps={areaProps} />
                       )
                     },
-                    sortOrder: 25
+                    sortOrder: 30
                   },
                   {
                     component: {
                       default: ({ areaProps }) => (
-                        <BasicRow id="categoryLimit" areaProps={areaProps} />
+                        <BasicRow id="currentCompletedQuantity" areaProps={areaProps} />
+                      )
+                    },
+                    sortOrder: 30
+                  },
+                  {
+                    component: {
+                      default: ({ areaProps }) => (
+                        <BasicRow id="roundStartDateTime" areaProps={areaProps} />
                       )
                     },
                     sortOrder: 30
@@ -145,9 +151,9 @@ export default function CategoryGrid({
           ))}
         </tbody>
       </table>
-      {categories.length === 0 && (
+      {rounds.length === 0 && (
         <div className="flex w-full justify-center">
-          There is no category to display
+          There are no on-going rewarding rounds to display
         </div>
       )}
       <Pagination total={total} limit={limit} page={page} />
@@ -156,18 +162,29 @@ export default function CategoryGrid({
 }
 
 CategoryGrid.propTypes = {
-  rewardCategories: PropTypes.shape({
+  rewardRounds: PropTypes.shape({
     items: PropTypes.arrayOf(
       PropTypes.shape({
-        categoryId: PropTypes.number.isRequired,
+        roundID: PropTypes.number.isRequired,
         uuid: PropTypes.string.isRequired,
         rewardDetails: PropTypes.string,
-        categoryName: PropTypes.string,
+        category: PropTypes.shape({
+          categoryName: PropTypes.string.isRequired
+        }),
+        winner: PropTypes.shape({
+          fullName: PropTypes.string
+        }),
         categoryLimit: PropTypes.string,
-        autoRestart: PropTypes.bool,
-        active: PropTypes.bool,
-        editUrl: PropTypes.string.isRequired,
-        deleteApi: PropTypes.string.isRequired
+        currentCompletedQuantity: PropTypes.string,
+        roundStatus: PropTypes.string,
+        roundStartDateTime: PropTypes.string,
+        roundEndDateTime: PropTypes.string,
+        isOngoing: PropTypes.bool,
+        isCompleted: PropTypes.bool,
+        deleteApi: PropTypes.string.isRequired,
+        viewRoundApi: PropTypes.string.isRequired,
+        selectWinnerApi: PropTypes.string.isRequired,
+        updateApi: PropTypes.string.isRequired
       })
     ).isRequired,
     total: PropTypes.number.isRequired,
@@ -178,8 +195,7 @@ CategoryGrid.propTypes = {
         value: PropTypes.string.isRequired
       })
     )
-  }).isRequired,
-  createRewardRoundsApi : PropTypes.string.isRequired
+  }).isRequired
 };
 
 export const layout = {
@@ -189,17 +205,28 @@ export const layout = {
 
 export const query = `
   query Query($filters: [FilterInput]) {
-    rewardCategories (filters: $filters) {
+    rewardRounds (filters: $filters) {
       items {
-        categoryId
-        categoryName
-        categoryLimit
-        rewardDetails
-        active
-        autoRestart
+        roundId
         uuid
-        editUrl
+        category {
+          categoryName
+        }
+        roundStatus
+        roundStartDateTime
+        roundEndDateTime
+        currentCompletedQuantity
+        categoryLimit
+        winner {
+          fullName
+        }
+        winnerSelectionDateTime
+        isOngoing
+        isCompleted
+        viewRoundApi
+        selectWinnerApi
         deleteApi
+        updateApi
       }
       total
       currentFilters {
@@ -208,7 +235,6 @@ export const query = `
         value
       }
     }
-    createRewardRoundsApi : url(routeId : "createRewardRounds")
   }
 `;
 

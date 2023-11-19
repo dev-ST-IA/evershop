@@ -1,8 +1,7 @@
 const { select, update, insert } = require('@evershop/postgres-query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
-  INVALID_PAYLOAD,
-  OK
+  INVALID_PAYLOAD
 } = require('@evershop/evershop/src/lib/util/httpStatus');
 
 // eslint-disable-next-line no-unused-vars
@@ -53,10 +52,6 @@ module.exports = async (request, response, delegate, next) => {
         customer_notified: 0 // TODO: check config of SendGrid
       })
       .execute(pool);
-
-    response.status(OK);
-    response.json({
-      data: {}
-    });
   }
+  return next();
 };
