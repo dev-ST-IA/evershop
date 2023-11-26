@@ -11,10 +11,27 @@ type RewardRound {
   winnerSelectionDateTime: String
   isOngoing: Boolean
   isCompleted: Boolean
+  isWinnerSelected: Boolean
+  winnerSelected: RoundStatus
   viewRoundApi: String
   selectWinnerApi: String
   deleteApi: String
   updateApi: String
+}
+
+type RoundStatus {
+  title: String
+  code: String
+  badge: String
+  progress: String
+}
+
+type RewardRoundHistory {
+  roundId: ID!
+  uuid: String!
+  roundHistoryId: ID!
+  description: String
+  createdAt: DateTime
 }
 
 type RewardRoundCollection {
@@ -26,5 +43,8 @@ type RewardRoundCollection {
 
 extend type Query {
   rewardRounds(filters: [FilterInput]): RewardRoundCollection
+  rewardRoundsCompleted(filters: [FilterInput]): RewardRoundCollection
   rewardRound (id: Int): RewardRound
+  rewardRoundHistory (id: Int): [RewardRoundHistory]
+  ongoingRewardRoundByCategory (categoryId: Int): RewardRound
 }

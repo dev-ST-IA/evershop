@@ -1,8 +1,0 @@
-type PendingOrder {
-  pendingOrderID: ID!
-  uuid: String!
-  category: RewardCategory!
-  customer: Customer!
-  orderItem: OrderItem!
-  quantity: Int
-}

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function RewardCategoryNameRow({ name, url }) {
+export default function RewardRoundIdRow({ name, url }) {
   return (
     <td>
       <div>
@@ -13,7 +13,7 @@ export default function RewardCategoryNameRow({ name, url }) {
   );
 }
 
-RewardCategoryNameRow.propTypes = {
+RewardRoundIdRow.propTypes = {
   url: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired.isRequired
 };

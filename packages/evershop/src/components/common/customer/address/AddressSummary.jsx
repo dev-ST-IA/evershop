@@ -38,7 +38,7 @@ export function AddressSummary({ address }) {
           component: {
             default: ({ city, province, postcode, country }) => (
               <div className="city-province-postcode">
-                <div>{`${postcode}, ${city}`}</div>
+                <div>{`${[postcode,city].filter(t=>!!t).join(',')}`}</div>
                 <div>
                   {province && <span>{province.name}, </span>}{' '}
                   <span>{country.name}</span>

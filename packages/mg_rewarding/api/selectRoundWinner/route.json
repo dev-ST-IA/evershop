@@ -1,0 +1,5 @@
+{
+  "methods": ["POST"],
+  "path": "/rewardRound/complete/:id",
+  "access": "private"
+}

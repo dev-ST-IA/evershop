@@ -10,8 +10,6 @@ module.exports = async (request, response, delegate, next) => {
     query.from('reward_category');
     query.andWhere('reward_category.uuid', '=', request.params.id);
     const category = await query.load(pool);
-    // eslint-disable-next-line no-console
-    console.log(category)
     if (category === null) {
       response.status(404);
       next();

@@ -59,20 +59,6 @@ CREATE TABLE user_rewards_history (
 );
 `;
 
-const pending_order_table = `
-CREATE TABLE pending_order (
-  pending_order_id INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY,
-  uuid UUID DEFAULT gen_random_uuid(),
-  category_id INT REFERENCES reward_category(category_id) NOT NULL,
-  customer_id INT REFERENCES customer(customer_id) NOT NULL,
-  product_id INT REFERENCES product(product_id) NOT NULL,
-  quantity INT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW(),
-  CONSTRAINT unique_uuid_order UNIQUE (uuid)
-);
-`;
-
 const add_fk_in_product_table = `
 ALTER TABLE product
 ADD COLUMN reward_category_id INT REFERENCES reward_category(category_id);
@@ -84,7 +70,6 @@ module.exports = exports = async (connection) => {
   await execute(connection, reward_round_table);
   await execute(connection, order_round_mapping_table);
   await execute(connection, user_rewards_history_table);
-  await execute(connection, pending_order_table);
 
   await execute(connection, add_fk_in_product_table);
 };

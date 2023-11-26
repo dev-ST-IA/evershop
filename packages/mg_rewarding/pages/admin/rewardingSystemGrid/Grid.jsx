@@ -119,7 +119,7 @@ export default function CategoryGrid({
                 coreComponents={[
                   {
                     component: {
-                      default: () => <RewardCategoryNameRow id="categoryName" rewardCategory={c} />
+                      default: () => <RewardCategoryNameRow id="categoryName" url={c.editUrl} name={c.categoryName} />
                     },
                     sortOrder: 10
                   },

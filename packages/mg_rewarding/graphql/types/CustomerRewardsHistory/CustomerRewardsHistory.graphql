@@ -1,7 +1,31 @@
-type CustomerRewardsHistory {
-  historyID: ID!
-  uuid: String!
-  customer: Customer!
-  round: RewardRound!
-  rewardReceived: Boolean!
+type CustomerRewardHistory {
+  historyId: ID
+  uuid: String
+  customer: Customer
+  order: Order
+  orderItem: OrderItem
+  round: RewardRound
+  rewardStatus: RewardStatus
+  remindersCount: Int
+  rewardExpiry: DateTime
+  rewardDetails: String
+  orderId: Int
+  orderItemId: Int
+  isExpired: Boolean
+  isCompleted: Boolean
+  updateRewardStatusApi: String
+  rewardReceived: Boolean
+  rewardSent: Boolean
+  reminderSent: Boolean
+}
+
+type RewardStatus {
+  title: String
+  code: String
+  badge: String
+  progress: String
+}
+
+extend type Query {
+  customerRewardHistory (roundId: Int): CustomerRewardHistory
 }

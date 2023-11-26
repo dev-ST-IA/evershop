@@ -1,4 +1,4 @@
-const { update } = require('@evershop/postgres-query-builder');
+const { update, insert } = require('@evershop/postgres-query-builder');
 const { pool } = require('@evershop/evershop/src/lib/postgres/connection');
 const {
   INVALID_PAYLOAD,
@@ -45,7 +45,19 @@ module.exports = async (request, response, delegate, next) => {
 
   const roundUpdated = await Promise.allSettled(completeRoundQueries);
   request.body.completedRounds = roundUpdated.map(t => t.value)
-  if (roundUpdated.find(t => t.status === 'rejected')) {
+
+  const roundCompletedEventsQuery = request.body.completedRounds
+  .map(r => insert('reward_round_history')
+  .given({
+    round_id:r.round_id,
+    description: 'Round Completed'
+  }).execute(pool))
+  const roundCompletedEventsPromises = await Promise.allSettled(roundCompletedEventsQuery);
+
+  const roundCompletedEventRejects = roundCompletedEventsPromises.find(r => r.status === 'rejected')
+
+
+  if (roundUpdated.find(t => t.status === 'rejected') || roundCompletedEventRejects) {
     response.status(INTERNAL_SERVER_ERROR);
     response.json({
       error: {

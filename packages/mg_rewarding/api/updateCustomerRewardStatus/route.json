@@ -1,0 +1,5 @@
+{
+  "methods": ["PATCH"],
+  "path": "/rewardRound/rewardStatus/:id",
+  "access": "private"
+}
