@@ -3,10 +3,10 @@ import React from 'react';
 import { Field } from '@components/common/form/Field';
 import { Card } from '@components/admin/cms/Card';
 
-export default function Inventory({ product }) {
-  const inventory = product?.thresholds || {};
+export default function SalesCountThreshold({ product }) {
+  const inventory = product?.saleCountThreshold || {};
   return (
-    <Card title="Inventory Threshold" subdued>
+    <Card title="Sales Count Threshold" subdued>
       <Card.Session>
         <Field
           id="salesCountThres"
@@ -18,35 +18,22 @@ export default function Inventory({ product }) {
           validationRules={['notEmpty','number', 'positiveNumber']}
         />
       </Card.Session>
-      <Card.Session>
-        <Field
-          id="inventoryLeftThres"
-          name="inventoryLeftThres"
-          value={inventory.inventoryLeftThres}
-          placeholder="Maximum Inventory Remaining To Display"
-          label="Max Inventory Remaining To Display"
-          type="text"
-          validationRules={['notEmpty','number','positiveNumber']}
-        />
-      </Card.Session>
     </Card>
   );
 }
 
-Inventory.propTypes = {
+SalesCountThreshold.propTypes = {
   product: PropTypes.shape({
-    thresholds: PropTypes.shape({
-      salesCountThres: PropTypes.number,
-      inventoryLeftThres: PropTypes.number
+    saleCountThreshold: PropTypes.shape({
+      salesCountThres: PropTypes.number
     })
   })
 };
 
-Inventory.defaultProps = {
+SalesCountThreshold.defaultProps = {
   product: {
-    thresholds: {
-      salesCountThres: 10,
-      inventoryLeftThres: 50
+    saleCountThreshold: {
+      salesCountThres: 10
     }
   }
 };
@@ -59,9 +46,8 @@ export const layout = {
 export const query = `
   query Query {
     product(id: getContextValue("productId", null)) {
-      thresholds {
+      saleCountThreshold {
         salesCountThres
-        inventoryLeftThres
       }
     }
   }

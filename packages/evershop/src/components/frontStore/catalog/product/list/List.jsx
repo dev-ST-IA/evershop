@@ -6,7 +6,6 @@ import { Price } from '@components/frontStore/catalog/product/list/item/Price';
 import Area from '@components/common/Area';
 import { get } from '@evershop/evershop/src/lib/util/get';
 import { _ } from '@evershop/evershop/src/lib/locale/translate';
-import { MgSalesCount } from '@components/frontStore/catalog/product/list/item/MgSalesCount';
 
 export default function ProductList({ products = [], countPerRow = 3 }) {
   if (products.length === 0) {
@@ -35,40 +34,33 @@ export default function ProductList({ products = [], countPerRow = 3 }) {
   return (
     <div className={className}>
       {products.map((p) => (
-          <Area
-            id="productListingItem"
-            className="listing-tem"
-            product={p}
-            key={p.productId}
-            coreComponents={[
-              {
-                component: { default: Thumbnail },
-                props: { url: p.url, imageUrl: get(p, 'image.url'), alt: p.name },
-                sortOrder: 10,
-                id: 'thumbnail'
-              },
-              {
-                component: { default: Name },
-                props: { name: p.name, url: p.url, id: p.productId },
-                sortOrder: 20,
-                id: 'name'
-              },
-              {
-                component: { default: Price },
-                props: { ...p.price },
-                sortOrder: 30,
-                id: 'price'
-              },
-              {
-                component: {default: MgSalesCount},
-                props:{salesCount:p.thresholds?.salesCount,salesCountThres:p.thresholds?.salesCountThres},
-                sortOrder: 40,
-                id: 'mg-sales'
-              }
-            ]}
-          />
-        )
-      )}
+        <Area
+          id="productListingItem"
+          className="listing-tem"
+          product={p}
+          key={p.productId}
+          coreComponents={[
+            {
+              component: { default: Thumbnail },
+              props: { url: p.url, imageUrl: get(p, 'image.url'), alt: p.name },
+              sortOrder: 10,
+              id: 'thumbnail'
+            },
+            {
+              component: { default: Name },
+              props: { name: p.name, url: p.url, id: p.productId },
+              sortOrder: 20,
+              id: 'name'
+            },
+            {
+              component: { default: Price },
+              props: { ...p.price },
+              sortOrder: 30,
+              id: 'price'
+            }
+          ]}
+        />
+      ))}
     </div>
   );
 }
@@ -93,10 +85,6 @@ ProductList.propTypes = {
       image: PropTypes.shape({
         alt: PropTypes.string,
         listing: PropTypes.string
-      }),
-      thresholds: PropTypes.shape({
-        salesCount: PropTypes.number,
-        salesCountThres: PropTypes.number
       })
     })
   ).isRequired,

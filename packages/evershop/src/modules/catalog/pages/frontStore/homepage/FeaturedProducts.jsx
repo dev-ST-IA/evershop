@@ -42,13 +42,7 @@ FeaturedProducts.propTypes = {
             alt: PropTypes.string.isRequired,
             url: PropTypes.string.isRequired
           }).isRequired,
-          url: PropTypes.string.isRequired,
-          thresholds: PropTypes.shape({
-            salesCount: PropTypes.number,
-            inventoryLeft:PropTypes.number,
-            salesCountThres: PropTypes.number,
-            inventoryLeftThres: PropTypes.number
-          })
+          url: PropTypes.string.isRequired
         })
       ).isRequired
     }).isRequired
@@ -85,10 +79,6 @@ export const query = `
             url: listing
           }
           url
-          thresholds{
-            salesCount
-            salesCountThres
-          }
         }
       }
     }

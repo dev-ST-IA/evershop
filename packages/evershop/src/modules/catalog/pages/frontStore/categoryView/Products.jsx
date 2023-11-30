@@ -39,10 +39,6 @@ Products.propTypes = {
           image: PropTypes.shape({
             alt: PropTypes.string,
             listing: PropTypes.string
-          }),
-          thresholds: PropTypes.shape({
-            salesCount: PropTypes.number,
-            salesCountThres: PropTypes.number
           })
         })
       )
@@ -94,10 +90,6 @@ export const fragments = `
       url: listing
     }
     url
-    thresholds{
-      salesCount
-      salesCountThres
-    }
   }
 `;
 
