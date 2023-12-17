@@ -1,0 +1,58 @@
+// CategoryComponent.scss
+
+.category-component {
+    // ... (unchanged styles)
+    .toggle-btn {
+      cursor: pointer;     
+      .toggle-icon{
+        width: 2.5rem;
+        height: 2rem;
+        margin-right: 1rem;
+      }
+    }
+  
+    .subcategories {
+      transition: height 0.3s ease;
+      &.collapsed {
+        display: block;
+      }
+  
+      &.expanded {
+        display: block;
+      }
+    }
+
+    .nav {
+      position: absolute;
+      top: 100%;
+      padding: 2.5rem;
+      width: 80vw;
+      left: -5vw;
+      @media screen and (max-width: 768px) {
+        left: - 17vw
+      }
+      
+      background-color: #fff;
+      z-index: 1000;
+      transition: opacity 0.3s ease, visibility 0.3s ease; 
+      
+      
+      .nav-item {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        &:first {
+          padding-top: 0;
+        }
+        &.last {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
+        a {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+  

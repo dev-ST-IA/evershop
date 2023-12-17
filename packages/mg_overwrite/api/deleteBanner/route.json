@@ -1,0 +1,5 @@
+{
+  "methods": ["DELETE"],
+  "path": "/banners/:id",
+  "access": "private"
+}

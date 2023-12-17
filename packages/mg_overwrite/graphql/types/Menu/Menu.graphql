@@ -1,0 +1,9 @@
+extend type MenuItem {
+  parentId: String
+  categoryId: String
+}
+
+
+extend type Query {
+  allMenu: Menu
+}

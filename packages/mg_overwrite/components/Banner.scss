@@ -1,0 +1,60 @@
+.main-banner-home {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left center;
+  height: 50vh;
+  width: 100%;
+  position: relative;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+
+  h2.h1 {
+    color: var(--primary);
+    letter-spacing: 0;
+    font-size: 3.2rem;
+    line-height: 4.2rem;
+    padding: 0.5rem;
+  }
+
+  .container{
+    position: relative;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .content{
+    position: relative;
+    width: fit-content;
+    top:40%;
+    left: 40%;
+  }
+
+  .descr {
+    color: var(--primary);
+    letter-spacing: 0;
+    font-size: 2rem;
+    line-height: 3rem;
+    padding: 0.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    background-size: cover; // Adjust for smaller screens
+    background-position: top center; // Adjust for smaller screens
+    width: 100vw;
+
+  h2.h1 {
+    font-size: 2rem; // Adjust text size for smaller screens
+    line-height: 3rem;
+  }
+
+  .descr {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    padding: 0.5rem;
+  }
+}
+}

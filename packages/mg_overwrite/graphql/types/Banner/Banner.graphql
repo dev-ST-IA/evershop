@@ -1,0 +1,39 @@
+"""
+The `Banner` type represents a banner object.
+"""
+type Banner {
+  cmsBannerId: ID!
+  uuid: String!
+  name: String!
+  active: Int!
+  image: BannerImage!
+  description: String
+  url: String
+  editUrl: String
+  updateApi: String!
+  deleteApi: String!
+}
+
+"""
+The `BannerImage` type represents a category image object.
+"""
+type BannerImage {
+  path: String!
+  url: String!
+}
+
+"""
+Returns a collection of categories.
+"""
+type BannerCollection {
+  items: [Banner]
+  currentPage: Int!
+  total: Int!
+  currentFilters: [Filter]
+}
+
+extend type Query {
+  banners(filters: [FilterInput]): BannerCollection
+  banner(id: Int): Banner
+}
+

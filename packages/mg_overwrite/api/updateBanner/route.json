@@ -1,0 +1,5 @@
+{
+  "methods": ["PATCH"],
+  "path": "/banners/:id",
+  "access": "private"
+}

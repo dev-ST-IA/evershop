@@ -1,0 +1,51 @@
+.carousel {
+  width: 80%;
+  height: 50vh;
+  z-index: 1;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.banner-carousel-container{
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.customArrowBtn {
+  width: 100%;
+  .customArrowIcon{
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    width: 3rem;
+    height: 3rem;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    color: var(--secondary);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--icon);
+      transition: background ease 0.5s;
+    }
+  }
+}
+
+.customArrowIcon.left {
+  margin-right: auto; /* Push the button to the left */
+  left:0;
+}
+
+.customArrowIcon.right {
+  margin-left: auto; /* Push the button to the right */
+  right:0;
+}
+
+

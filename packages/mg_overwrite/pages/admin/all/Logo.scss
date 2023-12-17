@@ -1,0 +1,17 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  a.logo-icon {
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    img{
+      margin-right: 0.5rem;
+    }
+  }
+  a {
+    align-self: center;
+    color: var(--secondary);
+    padding: 3px;
+  }
+}

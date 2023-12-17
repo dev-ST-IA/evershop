@@ -1,0 +1,9 @@
+extend type Collection {
+  includeAll: Int
+  includeAllOrderBy: Int
+  showInHomepage: Int
+}
+
+extend type Query {
+  featuredCollections: CollectionCollection
+}

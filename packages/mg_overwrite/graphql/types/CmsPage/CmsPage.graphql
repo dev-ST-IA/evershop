@@ -1,0 +1,18 @@
+
+extend type CmsPage {
+  showInFooter: Int
+  showInHeader: Int
+  showInMenu: Int
+}
+
+type CmsQuickLinks {
+  name: String!
+  urlKey: String
+  url: String
+}
+
+extend type Query {
+  cmsFooterLinks(filters: [FilterInput]): [CmsQuickLinks]
+  cmsHeaderLinks(filters: [FilterInput]): [CmsQuickLinks]
+  cmsMenuLinks(filters: [FilterInput]): [CmsQuickLinks]
+}

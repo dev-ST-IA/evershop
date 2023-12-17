@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "skipEscape": true
+    },
+    "image": {
+      "type": "string"
+    },
+    "url_id": {
+      "type": "integer",
+      "skipEscape": true
+    },
+    "active": {
+      "type": ["integer", "string"],
+      "enum": [0, 1, "0", "1"]
+    }
+  },
+  "additionalProperties": true
+}
